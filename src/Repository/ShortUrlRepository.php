@@ -19,32 +19,26 @@ class ShortUrlRepository extends ServiceEntityRepository
         parent::__construct($registry, ShortUrl::class);
     }
 
-    // /**
-    //  * @return ShortUrl[] Returns an array of ShortUrl objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function getUrl(string $code): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('s.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('su')
+            ->select('su.id, su.url, su.numberVisit')
+            ->andWhere("su.code = '$code'")
+            ->andWhere("su.expiresAt > CURRENT_TIMESTAMP()")
             ->getQuery()
             ->getResult()
-        ;
+            ;
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?ShortUrl
+    public function findShortUrl(string $shortUrl): array
     {
-        return $this->createQueryBuilder('s')
-            ->andWhere('s.exampleField = :val')
-            ->setParameter('val', $value)
+        $code = explode('/',trim($shortUrl, '/'));
+
+        return $this->createQueryBuilder('su')
+            ->select('su.numberVisit')
+            ->andWhere("su.code = '$code[3]'")
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult()
+            ;
     }
-    */
 }

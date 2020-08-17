@@ -42,9 +42,9 @@ class ShortUrl
     private DateTime $expiresAt;
 
     /**
-     * @OneToOne(targetEntity="App\Entity\ShortUrlStatistic", mappedBy="shortUrl")
+     * @ORM\Column(type="integer", options={"default":0})
      */
-    private ?ShortUrlStatistic $shortUrl;
+    private int $numberVisit = 0;
 
     public function getId(): int
     {
@@ -95,6 +95,18 @@ class ShortUrl
     public function setExpiresAt(DateTime $expiresAt): self
     {
         $this->expiresAt = $expiresAt;
+
+        return $this;
+    }
+
+    public function getNumberVisit(): int
+    {
+        return $this->numberVisit;
+    }
+
+    public function setNumberVisit(int $counterVisit): self
+    {
+        $this->numberVisit = $counterVisit;
 
         return $this;
     }

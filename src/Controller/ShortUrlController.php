@@ -34,7 +34,7 @@ class ShortUrlController extends AbstractController
     /**
      * @Route("/short-url", methods={"POST"}, name="short_url")
      */
-    public function generateShortUrl(Request $request, ShortUrlRepository $shortUrlRepository, RequestContext $requestContext): Response
+    public function generateShortUrl(Request $request, ShortUrlRepository $shortUrlRepository): Response
     {
         $shortUrl = (new ShortUrlBuilder($request, $shortUrlRepository))->build();
         $this->entityManager->persist($shortUrl);

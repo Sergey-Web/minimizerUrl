@@ -35,7 +35,7 @@ class Statistic implements StatisticInterface
         return (int) $data[0]['numberVisit'];
     }
 
-    private function checkRequiredParameters(\stdClass $data)
+    private function checkRequiredParameters(\stdClass $data): void
     {
         if(empty($data->short_url)) {
             throw new BadRequestHttpException('Error, short url for statistics is not set');

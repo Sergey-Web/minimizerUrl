@@ -9,6 +9,7 @@ use App\Service\Statistic;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class StatisticController extends AbstractController
@@ -16,7 +17,7 @@ class StatisticController extends AbstractController
     /**
      * @Route("/statistic/short-url", methods={"POST"}, name="short_url")
      */
-    public function getStatisticShortUrl(Request $request, ShortUrlRepository $shortUrlRepository)
+    public function getStatisticShortUrl(Request $request, ShortUrlRepository $shortUrlRepository): Response
     {
         $numVisit = (new Statistic($request, $shortUrlRepository))->getNumVisit();
 
